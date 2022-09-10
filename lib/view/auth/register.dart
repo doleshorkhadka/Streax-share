@@ -1,15 +1,28 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:io' as io;
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/route_manager.dart';
 import 'package:streax_share/constants.dart';
 import 'package:streax_share/routes.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
-  bool isImageUploaded = false;
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  PlatformFile? _image;
+  TextEditingController _emailcontroller = TextEditingController();
+  TextEditingController _usernamecontroller = TextEditingController();
+  TextEditingController _passwordcontroller = TextEditingController();
+
+  bool _isImageUploaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,45 +47,29 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 60,
-                  foregroundImage: isImageUploaded
-                      ? AssetImage('assets/music/music.png')
-                      : null,
-                  backgroundImage: AssetImage('assets/profile/default.png'),
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 5,
-                  child: InkWell(
-                    onTap: () async {
-                      FilePickerResult? image =
-                          await FilePicker.platform.pickFiles(
-                        allowMultiple: false,
-                        type: FileType.custom,
-                        allowedExtensions: ['png', 'jpg', 'jpeg'],
-                      );
-                      print(image!.names);
-                      print('File uploaded successfully !!');
-                    },
-                    child: Icon(FontAwesomeIcons.camera),
-                  ),
-                )
-              ],
+            avatarImage(context),
+            SizedBox(
+              height: 15,
+            ),
+            inputTextField(
+              controller: _usernamecontroller,
+              hintText: 'Enter username',
             ),
             SizedBox(
               height: 15,
             ),
             inputTextField(
+              controller: _emailcontroller,
               hintText: 'Enter email address',
+              keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(
               height: 15,
             ),
             inputTextField(
+              controller: _passwordcontroller,
               hintText: 'Enter Password',
+              isObsecured: true,
             ),
             SizedBox(
               height: 20,
@@ -81,30 +78,73 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Already have an Account?'),
-                SizedBox(
-                  width: 10,
-                ),
-                InkWell(
-                  child: Text(
-                    'Log In!',
-                    style: TextStyle(
-                      color: kbuttonColor,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesManager.login);
-                  },
-                ),
-              ],
-            )
+            loginSection(context)
           ],
         ),
       ),
     );
+  }
+
+  InkWell avatarImage(context) {
+    return InkWell(
+      onTap: uploadImage,
+      child: Stack(
+        children: [
+          CircleAvatar(
+            radius: 60,
+            foregroundImage: _isImageUploaded
+                ? null
+                : AssetImage('assets/profile/default.png'),
+            backgroundImage:
+                _image == null ? null : FileImage(io.File(_image!.path!)),
+          ),
+          Positioned(
+              bottom: 5,
+              right: 5,
+              child: Icon(_isImageUploaded
+                  ? FontAwesomeIcons.image
+                  : FontAwesomeIcons.fileCirclePlus)),
+        ],
+      ),
+    );
+  }
+
+  Row loginSection(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Already have an Account?'),
+        SizedBox(
+          width: 10,
+        ),
+        InkWell(
+          child: Text(
+            'Log In!',
+            style: TextStyle(
+              color: kbuttonColor,
+            ),
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, RoutesManager.login);
+          },
+        ),
+      ],
+    );
+  }
+
+  void uploadImage() async {
+    FilePickerResult? image = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.custom,
+      allowedExtensions: ['png', 'jpg', 'jpeg'],
+    );
+    if (image != null) {
+      Get.snackbar('Success !', 'Image Uploaded');
+    }
+    setState(() {
+      _image = image!.files.first;
+      _isImageUploaded = true;
+    });
   }
 
   Widget submitButton({VoidCallback? ontap}) {
@@ -130,10 +170,18 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  Widget inputTextField({required String hintText}) {
+  Widget inputTextField({
+    required TextEditingController controller,
+    required String hintText,
+    isObsecured = false,
+    TextInputType? keyboardType,
+  }) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        obscureText: isObsecured,
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding:
