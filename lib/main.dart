@@ -1,15 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:streax_share/controller/authcontroller.dart';
 
 import 'package:streax_share/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) {
-    Get.put(AuthController());
-  });
+  await Firebase.initializeApp();
+  // .then((value) {
+  //   AuthController();
+  // });
   runApp(const MyUI());
 }
 
@@ -18,7 +17,7 @@ class MyUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       initialRoute: RoutesManager.register,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),

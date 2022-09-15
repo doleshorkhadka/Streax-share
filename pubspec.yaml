@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  firebase_core: ^1.22.0
+  firebase_storage: ^10.3.8
   cloud_firestore: ^3.4.6
   cupertino_icons: ^1.0.2
   file_picker: ^5.0.1
@@ -34,11 +36,11 @@ dependencies:
   flutter:
     sdk: flutter
   font_awesome_flutter: ^10.1.0
-  get: ^4.6.5
   video_player: ^2.4.7
+  provider: ^6.0.3
 
 dev_dependencies:
-  flutter_launcher_icons: "^0.10.0"
+  flutter_launcher_icons: ^0.10.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -54,8 +56,8 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/app-icon/icon.png"
-  # min_sdk_android: 21 # android min sdk min:16, default 21
+  image_path: "assets/app-icon/streaxshare.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 # The following section is specific to Flutter packages.
 flutter:
 

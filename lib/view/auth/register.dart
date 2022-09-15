@@ -3,10 +3,11 @@
 import 'dart:io' as io;
 
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/route_manager.dart';
 import 'package:streax_share/constants.dart';
+import 'package:streax_share/model%20/user.dart' as model;
 import 'package:streax_share/routes.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -21,7 +22,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _usernamecontroller = TextEditingController();
   TextEditingController _passwordcontroller = TextEditingController();
-
   bool _isImageUploaded = false;
 
   @override
@@ -74,7 +74,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(
               height: 20,
             ),
-            submitButton(),
+            submitButton(ontap: () async {
+              authController.registerUser(
+                email: _emailcontroller.value.text,
+                username: _usernamecontroller.value.text,
+                password: _passwordcontroller.value.text,
+                image: _image!,
+              );
+
+              print('Uploading Finished ........');
+            }),
             SizedBox(
               height: 20,
             ),
@@ -138,13 +147,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
       type: FileType.custom,
       allowedExtensions: ['png', 'jpg', 'jpeg'],
     );
+
     if (image != null) {
-      Get.snackbar('Success !', 'Image Uploaded');
+      setState(() {
+        _image = image.files.first;
+        _isImageUploaded = true;
+      });
+      notificationBox('Image Uploaded');
     }
-    setState(() {
-      _image = image!.files.first;
-      _isImageUploaded = true;
-    });
+    if (image == null) {
+      notificationBox('No Image Selected');
+      return null;
+    }
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> notificationBox(
+      String message) {
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   Widget submitButton({VoidCallback? ontap}) {
