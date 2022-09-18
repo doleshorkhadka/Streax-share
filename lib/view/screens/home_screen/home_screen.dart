@@ -31,23 +31,31 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     EdgeInsets padding = MediaQuery.of(context).viewPadding;
     double height = MediaQuery.of(context).size.height;
-    double widht = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
             Container(
-              height: height - kbottomWidth - padding.top - padding.bottom,
-              width: widht,
+              margin: EdgeInsets.only(top: ktopwidth),
+              height: height -
+                  kbottomWidth -
+                  padding.top -
+                  padding.bottom -
+                  ktopwidth,
+              width: width,
               child: _controller.value.isInitialized
                   ? AspectRatio(
                       aspectRatio: _controller.value.aspectRatio,
                       child: VideoPlayer(_controller),
                     )
                   : Container(
-                      height:
-                          height - kbottomWidth - padding.top - padding.bottom,
-                      width: widht,
+                      height: height -
+                          kbottomWidth -
+                          padding.top -
+                          padding.bottom -
+                          ktopwidth,
+                      width: width,
                       color: Color(0x29348823),
                     ),
             ),
@@ -55,11 +63,36 @@ class _HomeScreenState extends State<HomeScreen> {
               children: const [
                 TopSection(),
                 CenterSection(),
+                ReactSection(),
                 BottomSection(),
               ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ReactSection extends StatelessWidget {
+  const ReactSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      height: 50,
+      color: Colors.lightBlue,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(
+            5,
+            (index) => Container(
+                  height: 50,
+                  width: 50,
+                  color: Colors.black,
+                )),
       ),
     );
   }

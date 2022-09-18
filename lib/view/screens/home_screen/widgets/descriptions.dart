@@ -27,32 +27,31 @@ class _TextDescriptionState extends State<TextDescription> {
           ),
         ),
         description(deviceWidth),
-        musicDetails()
       ],
     );
   }
 
-  Row musicDetails() {
-    return Row(mainAxisSize: MainAxisSize.min, children: [
-      Icon(
-        Icons.music_note_outlined,
-      ),
-      SizedBox(
-        width: 5,
-      ),
-      Expanded(
-        child: Container(
-          padding: EdgeInsets.only(right: 15),
-          child: Text(
-            'original sound - Manisha sujal sagar dancing in the rain. ',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            softWrap: true,
-          ),
-        ),
-      ),
-    ]);
-  }
+  // Row musicDetails() {
+  //   return Row(mainAxisSize: MainAxisSize.min, children: [
+  //     Icon(
+  //       Icons.music_note_outlined,
+  //     ),
+  //     SizedBox(
+  //       width: 5,
+  //     ),
+  //     Expanded(
+  //       child: Container(
+  //         padding: EdgeInsets.only(right: 15),
+  //         child: Text(
+  //           'original sound - Manisha sujal sagar dancing in the rain. ',
+  //           overflow: TextOverflow.ellipsis,
+  //           maxLines: 1,
+  //           softWrap: true,
+  //         ),
+  //       ),
+  //     ),
+  //   ]);
+  // }
 
   Row description(double deviceWidth) {
     return Row(

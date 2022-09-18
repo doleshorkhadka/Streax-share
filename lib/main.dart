@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:streax_share/constants.dart';
 
 import 'package:streax_share/routes.dart';
 
@@ -17,11 +19,16 @@ class MyUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: RoutesManager.register,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      onGenerateRoute: RoutesManager.routeSettings,
+    return Provider(
+      create: (context) => authController,
+      child: MaterialApp(
+        initialRoute: firebaseAuth.currentUser == null
+            ? RoutesManager.login
+            : RoutesManager.homepage,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(),
+        onGenerateRoute: RoutesManager.routeSettings,
+      ),
     );
   }
 }

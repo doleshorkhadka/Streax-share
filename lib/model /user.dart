@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
+enum React { love, haha, wow, sad, angry }
 
-class User with ChangeNotifier {
+class User {
   final String _username;
   final String _email;
   final String _uid;
@@ -25,4 +25,6 @@ class User with ChangeNotifier {
       'imageurl': _imageUrl,
     };
   }
+
+  String get uid => _uid;
 }

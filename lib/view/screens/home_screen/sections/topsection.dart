@@ -10,41 +10,25 @@ class TopSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 70,
       padding: const EdgeInsets.all(10),
       width: double.infinity,
+      color: Colors.black87,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(
-            Icons.live_tv,
-            size: 28,
-          ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 2),
-            width: 150,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Following',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  'For You',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+          InkWell(
+            child: Icon(
+              Icons.live_tv,
+              size: 28,
             ),
           ),
-          const Icon(
-            Icons.search,
-            size: 28,
+          InkWell(
+            child: Icon(
+              Icons.search,
+              size: 28,
+            ),
           ),
         ],
       ),

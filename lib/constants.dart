@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 import 'controller/authcontroller.dart';
 
-double kbottomWidth = 55;
+double kbottomWidth = 60;
+
+double ktopwidth = 70;
 
 Color kbuttonColor = Colors.orangeAccent;
 

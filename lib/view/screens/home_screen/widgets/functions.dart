@@ -17,11 +17,11 @@ enum ActionTick { react, comment, save, share }
 
 class _FunctionToolsState extends State<FunctionTools> {
   Map actionTickList = {
-    ActionTick.react: false,
     ActionTick.comment: false,
     ActionTick.save: false,
     ActionTick.share: false,
   };
+  profileUrl
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,11 +30,6 @@ class _FunctionToolsState extends State<FunctionTools> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           profilePP(url: 'assets/profile/pp.png', isFriend: true),
-          actionBotton(
-            iconName: FontAwesomeIcons.solidHeart,
-            text: '3.2M',
-            tick: ActionTick.react,
-          ),
           actionBotton(
               iconName: FontAwesomeIcons.solidCommentDots,
               text: '3K',
@@ -48,7 +43,7 @@ class _FunctionToolsState extends State<FunctionTools> {
             text: '22.2K',
             tick: ActionTick.share,
           ),
-          musicCircle(url: 'assets/music/music.png'),
+          // musicCircle(url: 'assets/music/music.png'),
         ],
       ),
     );
@@ -87,30 +82,30 @@ class _FunctionToolsState extends State<FunctionTools> {
     );
   }
 
-  Widget musicCircle({required String url}) {
-    return Padding(
-      padding: EdgeInsets.only(top: 25, bottom: 10),
-      child: Container(
-        padding: EdgeInsets.all(9),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(25)),
-          gradient: LinearGradient(
-            colors: [
-              Colors.black,
-              Color.fromARGB(255, 68, 65, 65),
-              Color.fromARGB(255, 46, 38, 38),
-              Colors.black,
-            ],
-          ),
-          color: Colors.black,
-        ),
-        child: CircleAvatar(
-          radius: 15,
-          backgroundImage: AssetImage(url),
-        ),
-      ),
-    );
-  }
+  // Widget musicCircle({required String url}) {
+  //   return Padding(
+  //     padding: EdgeInsets.only(top: 25, bottom: 10),
+  //     child: Container(
+  //       padding: EdgeInsets.all(9),
+  //       decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.all(Radius.circular(25)),
+  //         gradient: LinearGradient(
+  //           colors: [
+  //             Colors.black,
+  //             Color.fromARGB(255, 68, 65, 65),
+  //             Color.fromARGB(255, 46, 38, 38),
+  //             Colors.black,
+  //           ],
+  //         ),
+  //         color: Colors.black,
+  //       ),
+  //       child: CircleAvatar(
+  //         radius: 15,
+  //         backgroundImage: AssetImage(url),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget profilePP({required String url, required bool isFriend}) {
     return Container(
@@ -125,7 +120,7 @@ class _FunctionToolsState extends State<FunctionTools> {
             backgroundColor: Colors.white30,
             child: CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage(url),
+              backgroundImage: NetworkImage(url),
             ),
           ),
           Positioned(
