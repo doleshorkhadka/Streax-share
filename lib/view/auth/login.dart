@@ -53,24 +53,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              ReusedComponents().inputTextField(
+              AuthComponents().inputTextField(
                 controller: _emailcontroller,
                 hintText: 'Enter email address',
+                keyboardtype: TextInputType.emailAddress,
               ),
               SizedBox(
                 height: 15,
               ),
-              ReusedComponents().inputTextField(
+              AuthComponents().inputTextField(
                 controller: _passwordcontroller,
                 hintText: 'Enter Password',
-                isObsecured: true,
+                obscureText: true,
               ),
               SizedBox(
                 height: 20,
               ),
-              ReusedComponents().submitButton(
+              AuthComponents().submitButton(
                   text: 'Login',
-                  ontap: () async {
+                  onClick: () async {
                     if (_emailcontroller.text.isNotEmpty &&
                         _passwordcontroller.text.isNotEmpty) {
                       setState(() {
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                       _snackbarText = result.first;
                       if (!result.last) {
-                        ReusedComponents()
+                        AuthComponents()
                             .notificationBox(messengerState, _snackbarText);
                       } else {
                         if (!mounted) return;
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     } else {
                       ScaffoldMessengerState messengerState =
                           ScaffoldMessenger.of(context);
-                      ReusedComponents()
+                      AuthComponents()
                           .notificationBox(messengerState, _snackbarText);
                     }
                   }),

@@ -59,7 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 _usernamecontroller,
                 '@Must be atleast 4 characters!',
               ),
-              ReusedComponents().inputTextField(
+              AuthComponents().inputTextField(
                 controller: _usernamecontroller,
                 hintText: 'Enter username',
               ),
@@ -68,27 +68,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 _emailcontroller,
                 '@Must be valid email address!',
               ),
-              ReusedComponents().inputTextField(
+              AuthComponents().inputTextField(
                 controller: _emailcontroller,
                 hintText: 'Enter email address',
-                keyboardType: TextInputType.emailAddress,
+                keyboardtype: TextInputType.emailAddress,
               ),
               inputInfo(
                 context,
                 _passwordcontroller,
                 '@Must be atleast 8 characters!',
               ),
-              ReusedComponents().inputTextField(
+              AuthComponents().inputTextField(
                 controller: _passwordcontroller,
                 hintText: 'Enter Password',
-                isObsecured: true,
+                obscureText: true,
               ),
               SizedBox(
                 height: 20,
               ),
-              ReusedComponents().submitButton(
+              AuthComponents().submitButton(
                   text: 'Register',
-                  ontap: () async {
+                  onClick: () async {
                     setState(() {
                       _isProcessBar = true;
                       _isregisterClicked = true;
@@ -99,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         _passwordcontroller.value.text.isEmpty ||
                         _usernamecontroller.value.text.isEmpty ||
                         _image == null) {
-                      ReusedComponents().notificationBox(
+                      AuthComponents().notificationBox(
                           messengerState, 'Fill all input fields !!!');
                       setState(() {
                         _isProcessBar = false;
@@ -116,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       _isProcessBar = false;
                     });
                     if (!_registerUserSts) {
-                      ReusedComponents().notificationBox(
+                      AuthComponents().notificationBox(
                           messengerState, 'Error creating user !!!');
                     } else {
                       if (!mounted) return;
@@ -239,10 +239,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _image = image.files.first;
         _isImageUploaded = true;
       });
-      ReusedComponents().notificationBox(messengerState, 'Image Uploaded');
+      AuthComponents().notificationBox(messengerState, 'Image Uploaded');
     }
     if (image == null) {
-      ReusedComponents().notificationBox(messengerState, 'No Image Selected');
+      AuthComponents().notificationBox(messengerState, 'No Image Selected');
       return null;
     }
   }
