@@ -26,11 +26,15 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              child: CircleAvatar(
-                backgroundImage: AssetImage("assets/app-icon/streaxshare.png"),
-                radius: 60,
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: AssetImage("assets/app-icon/streaxshare.png")),
               ),
             ),
             Container(

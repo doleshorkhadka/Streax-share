@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:streax_share/constants.dart';
 
 class AuthComponents {
   Widget inputTextField({
@@ -15,7 +16,7 @@ class AuthComponents {
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(32.0)),
           ),
@@ -38,7 +39,7 @@ class AuthComponents {
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      height: 64,
+      height: kbottonSize,
       child: ElevatedButton(
         onPressed: onClick,
         style: ButtonStyle(

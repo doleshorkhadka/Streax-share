@@ -9,6 +9,8 @@ double kbottomWidth = 60;
 
 double ktopwidth = 70;
 
+double kbottonSize = 64;
+
 Color kbuttonColor = Colors.orangeAccent;
 
 // FIREBASE
