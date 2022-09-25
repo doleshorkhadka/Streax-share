@@ -36,7 +36,8 @@ class AuthComponents {
     required String text,
     required VoidCallback onClick,
   }) {
-    return SizedBox(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       height: 64,
       child: ElevatedButton(
         onPressed: onClick,

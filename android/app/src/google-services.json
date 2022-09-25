@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "795836360409",
+    "firebase_url": "https://streax-share-default-rtdb.firebaseio.com",
+    "project_id": "streax-share",
+    "storage_bucket": "streax-share.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795836360409:android:12fa588af7d8459f2400c8",
+        "android_client_info": {
+          "package_name": "com.example.streax_share"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795836360409-p5p2ibu3t5cc88ljv1lmlhnipfk4ml7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDnqVssHmHIS9xIAQTpB2EIC53RDqrg1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795836360409-p5p2ibu3t5cc88ljv1lmlhnipfk4ml7r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "795836360409-nlait4j0acof81uou967qnfu587f1cae.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.streax-share"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
