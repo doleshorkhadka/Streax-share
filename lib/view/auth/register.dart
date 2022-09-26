@@ -6,7 +6,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:streax_share/constants.dart';
-import 'package:streax_share/model%20/user.dart' as model;
 import 'package:streax_share/routes.dart';
 import 'package:streax_share/view/auth/components.dart';
 
@@ -30,102 +29,107 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  'Streax Share',
-                  style: TextStyle(
-                      fontSize: 40,
-                      color: kbuttonColor,
-                      fontWeight: FontWeight.w700),
+      body: AuthComponents().progressIndicator(
+        inAsyncCall: _isProcessBar,
+        opacity: 0.5,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(
+                    'Streax Share',
+                    style: TextStyle(
+                        fontSize: 40,
+                        color: kbuttonColor,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
-            ),
-            Center(child: avatarImage(context)),
-            inputInfo(
-              context,
-              _usernamecontroller,
-              '@Must be atleast 4 characters!',
-            ),
-            AuthComponents().inputTextField(
-              controller: _usernamecontroller,
-              hintText: 'Enter username',
-            ),
-            inputInfo(
-              context,
-              _emailcontroller,
-              '@Must be valid email address!',
-            ),
-            AuthComponents().inputTextField(
-              controller: _emailcontroller,
-              hintText: 'Enter email address',
-              keyboardtype: TextInputType.emailAddress,
-            ),
-            inputInfo(
-              context,
-              _passwordcontroller,
-              '@Must be atleast 8 characters!',
-            ),
-            AuthComponents().inputTextField(
-              controller: _passwordcontroller,
-              hintText: 'Enter Password',
-              obscureText: true,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            AuthComponents().submitButton(
-                text: 'Register',
-                onClick: () async {
-                  setState(() {
-                    _isProcessBar = true;
-                    _isregisterClicked = true;
-                  });
-                  ScaffoldMessengerState messengerState =
-                      ScaffoldMessenger.of(context);
-                  if (_emailcontroller.value.text.isEmpty ||
-                      _passwordcontroller.value.text.isEmpty ||
-                      _usernamecontroller.value.text.isEmpty ||
-                      _image == null) {
-                    AuthComponents().notificationBox(
-                        messengerState, 'Fill all input fields !!!');
+              Center(child: avatarImage(context)),
+              inputInfo(
+                context,
+                _usernamecontroller,
+                '@Must be atleast 4 characters!',
+              ),
+              AuthComponents().inputTextField(
+                controller: _usernamecontroller,
+                hintText: 'Enter username',
+              ),
+              inputInfo(
+                context,
+                _emailcontroller,
+                '@Must be valid email address!',
+              ),
+              AuthComponents().inputTextField(
+                controller: _emailcontroller,
+                hintText: 'Enter email address',
+                keyboardtype: TextInputType.emailAddress,
+              ),
+              inputInfo(
+                context,
+                _passwordcontroller,
+                '@Must be atleast 8 characters!',
+              ),
+              AuthComponents().inputTextField(
+                controller: _passwordcontroller,
+                hintText: 'Enter Password',
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              AuthComponents().submitButton(
+                  text: 'Register',
+                  onClick: () async {
+                    setState(() {
+                      _isProcessBar = true;
+                      _isregisterClicked = true;
+                    });
+                    ScaffoldMessengerState messengerState =
+                        ScaffoldMessenger.of(context);
+                    if (_emailcontroller.value.text.isEmpty ||
+                        _passwordcontroller.value.text.isEmpty ||
+                        _usernamecontroller.value.text.isEmpty ||
+                        _image == null) {
+                      AuthComponents().notificationBox(
+                          messengerState, 'Fill all input fields !!!');
+                      setState(() {
+                        _isProcessBar = false;
+                      });
+                      return;
+                    }
+                    _registerUserSts = await authController.registerUser(
+                      email: _emailcontroller.value.text,
+                      username: _usernamecontroller.value.text,
+                      password: _passwordcontroller.value.text,
+                      image: _image,
+                    );
                     setState(() {
                       _isProcessBar = false;
                     });
-                    return;
-                  }
-                  _registerUserSts = await authController.registerUser(
-                    email: _emailcontroller.value.text,
-                    username: _usernamecontroller.value.text,
-                    password: _passwordcontroller.value.text,
-                    image: _image,
-                  );
-                  setState(() {
-                    _isProcessBar = false;
-                  });
-                  if (!_registerUserSts) {
-                    AuthComponents().notificationBox(
-                        messengerState, 'Error creating user !!!');
-                  } else {
-                    if (!mounted) return;
-                    Navigator.popAndPushNamed(context, RoutesManager.homepage);
-                  }
-                }),
-            SizedBox(
-              height: 20,
-            ),
-            loginSection(context)
-          ],
+                    if (!_registerUserSts) {
+                      AuthComponents().notificationBox(
+                          messengerState, 'Error creating user !!!');
+                    } else {
+                      if (!mounted) return;
+                      Navigator.popAndPushNamed(
+                          context, RoutesManager.homepage);
+                    }
+                  }),
+              SizedBox(
+                height: 20,
+              ),
+              loginSection(context)
+            ],
+          ),
         ),
       ),
     );

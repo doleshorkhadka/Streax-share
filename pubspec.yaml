@@ -36,7 +36,6 @@ dependencies:
   flutter:
     sdk: flutter
   font_awesome_flutter: ^10.1.0
-  modal_progress_hud_nsn: ^0.3.0
   provider: ^6.0.3
   video_player: ^2.4.7
 
@@ -56,9 +55,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_icons:
   android: "launcher_icon"
-  ios: true
+  ios: false
   image_path: "assets/app-icon/streaxshare.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
+  remove_alpha_ios: true
 # The following section is specific to Flutter packages.
 flutter:
 

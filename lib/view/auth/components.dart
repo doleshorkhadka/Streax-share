@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:streax_share/constants.dart';
 
@@ -6,11 +8,12 @@ class AuthComponents {
     required TextEditingController controller,
     required String hintText,
     bool obscureText = false,
-    TextInputType keyboardtype = TextInputType.none,
+    TextInputType keyboardtype = TextInputType.visiblePassword,
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
+        controller: controller,
         keyboardType: keyboardtype,
         obscureText: obscureText,
         decoration: InputDecoration(
@@ -57,6 +60,44 @@ class AuthComponents {
   notificationBox(massengerstate, message) {
     massengerstate.showSnackBar(
       SnackBar(content: Text(message)),
+    );
+  }
+
+  Widget progressIndicator({
+    Key? key,
+    required inAsyncCall,
+    double opacity = 0.3,
+    Color color = Colors.grey,
+    Widget progressIndicator = const CircularProgressIndicator(),
+    Offset? offset,
+    bool dismissible = false,
+    required Widget child,
+    double blur = 0.0,
+  }) {
+    if (!inAsyncCall) return child;
+    Widget layOutProgressIndicator;
+    if (offset == null) {
+      layOutProgressIndicator = Center(child: progressIndicator);
+    } else {
+      layOutProgressIndicator = Positioned(
+        left: offset.dx,
+        top: offset.dy,
+        child: progressIndicator,
+      );
+    }
+
+    return Stack(
+      children: [
+        child,
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+          child: Opacity(
+            opacity: opacity,
+            child: ModalBarrier(dismissible: dismissible, color: color),
+          ),
+        ),
+        layOutProgressIndicator,
+      ],
     );
   }
 }
