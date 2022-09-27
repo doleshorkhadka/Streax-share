@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:streax_share/constants.dart';
 import 'package:firebase_core/firebase_core.dart' as firebasecore;
 import 'package:streax_share/model%20/user.dart' as model;
@@ -97,5 +98,18 @@ class AuthController {
     // } catch (e) {
     //   return {'Network Error!', false};
     // }
+  }
+
+  Future<XFile?> pickVideo() async {
+    try {
+      XFile? image = await ImagePicker().pickVideo(
+        source: ImageSource.gallery,
+        maxDuration: const Duration(minutes: 1),
+      );
+      if (image == null) return null;
+      return image;
+    } catch (e) {
+      return null;
+    }
   }
 }
