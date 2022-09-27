@@ -121,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     } else {
                       if (!mounted) return;
                       Navigator.popAndPushNamed(
-                          context, RoutesManager.homepage);
+                          context, MaterialRoutes.homepage);
                     }
                   }),
               SizedBox(
@@ -219,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           onTap: () {
-            Navigator.pushNamed(context, RoutesManager.login);
+            Navigator.pushNamed(context, MaterialRoutes.login);
           },
         ),
       ],

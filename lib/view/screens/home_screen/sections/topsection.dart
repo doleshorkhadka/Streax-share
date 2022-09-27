@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:streax_share/routes.dart';
 
 class TopSection extends StatelessWidget {
   const TopSection({
@@ -23,6 +25,12 @@ class TopSection extends StatelessWidget {
               Icons.live_tv,
               size: 28,
             ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, MaterialRoutes.newvideo);
+            },
+            child: Icon(FontAwesomeIcons.plus),
           ),
           InkWell(
             child: Icon(

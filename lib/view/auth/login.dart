@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       } else {
                         if (!mounted) return;
                         Navigator.popAndPushNamed(
-                            context, RoutesManager.homepage);
+                            context, MaterialRoutes.homepage);
                       }
                     } else {
                       ScaffoldMessengerState messengerState =
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, RoutesManager.register);
+                      Navigator.pushNamed(context, MaterialRoutes.register);
                     },
                   ),
                 ],

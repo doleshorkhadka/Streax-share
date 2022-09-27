@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:streax_share/constants.dart';
 import 'package:streax_share/routes.dart';
+import 'package:streax_share/core/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // .then((value) {
-  //   AuthController();
-  // });
   runApp(const MyUI());
 }
 
@@ -22,11 +20,12 @@ class MyUI extends StatelessWidget {
       create: (context) => authController,
       child: MaterialApp(
         initialRoute: firebaseAuth.currentUser == null
-            ? RoutesManager.login
-            : RoutesManager.homepage,
+            ? MaterialRoutes.login
+            : MaterialRoutes.homepage,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(),
-        onGenerateRoute: RoutesManager.routeSettings,
+        theme: MainAppTheme.dark,
+        themeMode: ThemeMode.dark,
+        onGenerateRoute: MaterialRoutes.routeSettings,
       ),
     );
   }
